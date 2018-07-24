@@ -1,5 +1,6 @@
 package com.kuliashou.information.main;
 
+import com.kuliashou.information.action.TextAction;
 import com.kuliashou.information.composite.Component;
 import com.kuliashou.information.composite.Composite;
 import com.kuliashou.information.composite.PartType;
@@ -11,18 +12,19 @@ public class Main {
 
     public static void main(String[] args) throws TextReaderException {
 
-        String text = TextReader.readText("data/text.txt");
+        String text = TextReader.readText("data/england.txt");
         Component composite = new Composite(PartType.TEXT);
         TextParser textParser = new TextParser();
 
         textParser.parse(composite, text);
         composite = textParser.getTextComposite();
-        String actual = composite.toString();
 
-        System.out.println(actual);
+        Component sortParagraphsByLengthOfSentences = TextAction.sortParagraphsByLengthOfSentences(composite);
+        System.out.println(sortParagraphsByLengthOfSentences);
+
+        Component sortSentencesByLengthOfLexemes = TextAction.sortSentencesByLengthOfLexemes(composite);
+        System.out.println(sortSentencesByLengthOfLexemes);
+
     }
 
-    //Ко всем проверяемым исключениям logger не пишем.
-    // Исключения обычно dao, pool, service по одному
-    // dao исключения наследовать от sql исключений
 }
