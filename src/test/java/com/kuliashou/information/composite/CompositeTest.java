@@ -14,7 +14,6 @@ public class CompositeTest {
 
     private TextParser textParser;
     private Component textComposite;
-    private String text;
 
     @BeforeClass
     public void setUp() {
@@ -26,19 +25,23 @@ public class CompositeTest {
     public void tearDown() {
         textParser = null;
         textComposite = null;
-        text = null;
     }
 
     @Test
-    public void TextTest() {
+    public void testComposite() {
 
         //Given
-        String expected = "    Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        String expected = "    Advertisements want to persuade us to buy " +
+                "particular products. How do they do it. You feel thirsty." +
+                "    If advertisements are to he learned, there is a need for " +
+                "lots of repetition. You see people looking cool and relaxed." +
+                "    Consumers learn to generalize from what they " +
+                "have learned.";
         String actual = null;
 
         //When
         try {
-            text = TextReader.readText("data/testComposite.txt");
+            String text = TextReader.readText("data/test.txt");
             textParser.parse(textComposite, text);
             textComposite = textParser.getTextComposite();
             actual = textComposite.toString();

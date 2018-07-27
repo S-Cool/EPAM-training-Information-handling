@@ -1,11 +1,15 @@
 package com.kuliashou.information.action;
 
 import com.kuliashou.information.composite.Component;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextAction {
+
+    private static Logger logger = LogManager.getLogger();
 
     /**
      * Paragraph sorting by sentences count.
@@ -16,6 +20,7 @@ public class TextAction {
     public static Component sortParagraphsByLengthOfSentences(Component textComposite) {
         List<Component> paragraphs = textComposite.getComponents();
         sortComponents(paragraphs);
+        logger.info("Text has sorted by length of sentences.");
         return textComposite;
     }
 
@@ -32,11 +37,12 @@ public class TextAction {
                 sortComponents(lexemes);
             }
         }
+        logger.info("Text has sorted by length of lexemes.");
         return textComposite;
     }
 
     /**
-     * Custom Bubble sort for composite
+     * Custom Bubble sort for composite elements.
      *
      * @param components list components for sorting
      */
@@ -48,10 +54,10 @@ public class TextAction {
                 Component partFirst = components.get(j);
                 Component partSecond = components.get(j + 1);
 
-                int FirstLength = partFirst.getComponents().size();
-                int SecondLength = partSecond.getComponents().size();
+                int firstLength = partFirst.getComponents().size();
+                int secondLength = partSecond.getComponents().size();
 
-                if (FirstLength > SecondLength) {
+                if (firstLength > secondLength) {
                     List<Component> first = new ArrayList<>(partFirst.getComponents());
                     List<Component> second = new ArrayList<>(partSecond.getComponents());
 
